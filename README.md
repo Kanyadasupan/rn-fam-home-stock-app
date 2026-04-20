@@ -61,36 +61,7 @@ FamCart เป็นแอปพลิเคชันบนสมาร์ทโ
   </tr>
 </table>
 
-## 🚀 การติดตั้งและรันโปรเจกต์
-
-1.  **Clone โปรเจกต์:**
-    ```bash
-    git clone [https://github.com/KanyadaSupan/kamphangpet-app.git](https://github.com/KanyadaSupan/kamphangpet-app.git)
-    cd kamphangpet-app
-    ```
-
-2.  **ติดตั้ง Dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **ตั้งค่า Environment Variables:**
-    สร้างไฟล์ `.env` และใส่ค่า API จาก Supabase ของคุณ:
-    ```env
-    EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
-    EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-    ```
-
-4.  **รันแอปพลิเคชัน:**
-    ```bash
-    npx expo start
-    ```
-
----
 
 ## 👤 ผู้พัฒนา
 **Developed by [Kanyada](https://github.com/KanyadaSupan)**
 *Student at Southeast Asia University | Digital Technology and Innovation*
-
----
-Developed with ❤️ for Kamphaeng Phet
