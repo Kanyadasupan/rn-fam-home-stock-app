@@ -38,6 +38,14 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "อนุญาตให้ FamCart เข้าถึงรูปภาพเพื่อเลือกรูปสินค้า",
+          "cameraPermission": "อนุญาตให้ FamCart เข้าถึงกล้องเพื่อถ่ายรูปสินค้า"
+        }
       ]
     ],
     "experiments": {
