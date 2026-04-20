@@ -85,7 +85,6 @@ export const EditProfileModal = ({
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.backdrop}>
-        {/* 🟢 แยกส่วนพื้นหลังที่กดเพื่อปิด Modal ออกมาใช้ absoluteFill */}
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss();
@@ -95,7 +94,6 @@ export const EditProfileModal = ({
           <View style={StyleSheet.absoluteFill} />
         </TouchableWithoutFeedback>
 
-        {/* 🟢 ส่วนเนื้อหากล่องสีขาว ไม่ต้องถูกหุ้มด้วย Touchable แล้ว */}
         <Animated.View style={[styles.sheet, { transform: [{ translateY }] }]}>
           <View style={styles.handle} />
 
@@ -140,7 +138,6 @@ export const EditProfileModal = ({
           <View style={styles.divider} />
 
           <Text style={styles.label}>บัญชีผู้ใช้งาน</Text>
-          {/* 🟢 พอกล่องขาวไม่ถูกหุ้ม ปุ่มนี้จะกดติดตั้งแต่ครั้งแรกแน่นอน */}
           <TouchableOpacity
             style={styles.logoutBtn}
             onPress={handleSignOut}

@@ -51,10 +51,8 @@ export default function SignInScreen() {
     <View style={styles.root}>
       <StatusBar barStyle="dark-content" />
 
-      {/* ── Background Decorative Elements ── */}
       <View style={styles.decorCircleTop} />
 
-      {/* 🟢 อัปเกรด KeyboardAvoidingView ให้ดันจอขึ้นเป๊ะๆ ทั้ง iOS และ Android */}
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -64,10 +62,9 @@ export default function SignInScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
-          bounces={false} // 🟢 ลดอาการจอเด้งเด้งบน iOS เวลายุบคีย์บอร์ด
+          bounces={false}
         >
           <View>
-            {/* ── Header Section ── */}
             <View style={styles.headerContainer}>
               <View style={styles.logoBox}>
                 <Feather name="shopping-bag" size={28} color={C.surface} />
@@ -78,7 +75,6 @@ export default function SignInScreen() {
               </Text>
             </View>
 
-            {/* ── Form Section ── */}
             <View style={styles.formCard}>
               <View style={styles.inputWrapper}>
                 <Input
@@ -135,7 +131,6 @@ export default function SignInScreen() {
               </View>
             </View>
 
-            {/* ── Footer ── */}
             <View style={styles.footer}>
               <Text style={styles.footerText}>ยังไม่มีบัญชีใช่ไหม? </Text>
               <TouchableOpacity
@@ -156,8 +151,6 @@ export default function SignInScreen() {
     </View>
   );
 }
-
-// ─── Styles ───────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
   root: {
     flex: 1,

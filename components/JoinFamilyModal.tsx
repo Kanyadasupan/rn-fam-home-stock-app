@@ -32,7 +32,6 @@ export const JoinFamilyModal = ({
   const handlePressSubmit = () => {
     const cleanCode = code.trim().toUpperCase();
 
-    // เช็คเบื้องต้นว่าพิมพ์ครบ 6 ตัวไหม (ถ้า Nick ใช้รหัส 6 หลัก)
     if (cleanCode.length < 6) {
       return Alert.alert("รหัสไม่ครบ", "กรุณากรอกรหัสของเพื่อนให้ครบ 6 หลัก", [
         { text: "ตกลง" },
@@ -87,7 +86,7 @@ export const JoinFamilyModal = ({
                     onChangeText={setCode}
                     autoCapitalize="characters"
                     autoCorrect={false}
-                    maxLength={6} // 🟢 ล็อคไว้ที่ 6 ตัวตามที่ Nick บอก
+                    maxLength={6}
                     autoFocus={true}
                     onSubmitEditing={handlePressSubmit}
                   />
@@ -120,7 +119,6 @@ export const JoinFamilyModal = ({
   );
 };
 
-// ... สไตล์ CSS เดิมของ Nick (ไม่ต้องแก้ครับ สวยอยู่แล้ว)
 const styles = StyleSheet.create({
   modalBackdrop: {
     flex: 1,

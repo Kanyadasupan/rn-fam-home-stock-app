@@ -10,7 +10,6 @@ import {
 import { Button } from "@/components/Button";
 import { useRouter, Href } from "expo-router";
 
-// ดึงขนาดหน้าจอมาเพื่อจัดวางวงกลมตกแต่งให้พอดี
 const { width, height } = Dimensions.get("window");
 
 // ─── Design Tokens (Emerald Theme) ─────────────────────────────────────────────
@@ -43,16 +42,14 @@ function useFadeSlide(delay = 0) {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [opacity, translateY, delay]);
 
   return { opacity, transform: [{ translateY }] };
 }
 
-// ─── Screen ───────────────────────────────────────────────────────────────────
 export default function IndexScreen() {
   const router = useRouter();
 
-  // แบ่งจังหวะการโผล่ของเนื้อหาและปุ่มให้ไล่เลี่ยกัน
   const contentAnim = useFadeSlide(100);
   const buttonAnim = useFadeSlide(300);
 
@@ -68,7 +65,7 @@ export default function IndexScreen() {
         {/* ชื่อแอป */}
         <Text style={styles.title}>FamCart</Text>
 
-        {/* รูปโลโก้ตรงกลาง (มีแสง Glow ด้านหลังรูปลดความแบนราบ) */}
+        {/* รูปโลโก้ตรงกลาง*/}
         <View style={styles.imageWrapper}>
           <View style={styles.imageGlow} />
           <Image
@@ -84,7 +81,7 @@ export default function IndexScreen() {
         </Text>
       </Animated.View>
 
-      {/* ── ปุ่มกดเริ่มใช้งาน ── */}
+      {/* ปุ่มกดเริ่มใช้งาน */}
       <Animated.View style={[styles.footer, buttonAnim]}>
         <Button
           title="เริ่มต้นใช้งาน"
@@ -95,7 +92,6 @@ export default function IndexScreen() {
   );
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -103,8 +99,6 @@ const styles = StyleSheet.create({
     position: "relative",
     overflow: "hidden",
   },
-
-  // ── Decorative Blobs ──
   blob1: {
     position: "absolute",
     width: width * 0.8,
@@ -135,8 +129,6 @@ const styles = StyleSheet.create({
     right: -width * 0.1,
     opacity: 0.1,
   },
-
-  // ── Content ──
   content: {
     flex: 1,
     alignItems: "center",
@@ -178,11 +170,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 24,
   },
-
-  // ── Footer ──
   footer: {
     paddingHorizontal: 24,
-    paddingBottom: 48, // เผื่อพื้นที่ให้ขอบจอด้านล่าง (Safe Area)
+    paddingBottom: 48,
     paddingTop: 20,
     zIndex: 1,
   },

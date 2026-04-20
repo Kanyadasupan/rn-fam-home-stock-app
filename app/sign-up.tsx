@@ -21,13 +21,12 @@ const C = {
   primary: "#10B981",
   primaryLight: "#D1FAE5",
   surface: "#FFFFFF",
-  textHigh: "#0F172A", // Slate 900
-  textMed: "#64748B", // Slate 500
-  textLow: "#94A3B8", // Slate 400
-  bg: "#F8FAFC", // Slate 50
+  textHigh: "#0F172A",
+  textMed: "#64748B",
+  textLow: "#94A3B8",
+  bg: "#F8FAFC",
 } as const;
 
-// ─── Screen ───────────────────────────────────────────────────────────────────
 export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -36,7 +35,6 @@ export default function SignUpScreen() {
   const [isSecure, setIsSecure] = useState(true);
   const router = useRouter();
 
-  // ── Logic การสมัคร ─────────────────────────────────────────
   const signUpWithEmail = async () => {
     if (!email || !username || !password) {
       return Alert.alert("แจ้งเตือน", "กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -70,15 +68,11 @@ export default function SignUpScreen() {
     }
     setLoading(false);
   };
-  // ─────────────────────────────────────────────────────────────────────────
 
   return (
     <View style={styles.root}>
       <StatusBar barStyle="dark-content" />
-
-      {/* ── Background Decorative Elements ── */}
       <View style={styles.decorCircleTop} />
-
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -91,7 +85,6 @@ export default function SignUpScreen() {
           bounces={false}
         >
           <View>
-            {/* ── Header Section ── */}
             <View style={styles.headerContainer}>
               <TouchableOpacity
                 style={styles.backBtn}
@@ -110,7 +103,6 @@ export default function SignUpScreen() {
               </Text>
             </View>
 
-            {/* ── Form Section ── */}
             <View style={styles.formCard}>
               <View style={styles.inputWrapper}>
                 <Input
@@ -167,7 +159,6 @@ export default function SignUpScreen() {
               </View>
             </View>
 
-            {/* ── Footer ── */}
             <View style={styles.footer}>
               <Text style={styles.footerText}>มีบัญชีอยู่แล้วใช่ไหม? </Text>
               <TouchableOpacity
@@ -184,7 +175,6 @@ export default function SignUpScreen() {
   );
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
   root: {
     flex: 1,

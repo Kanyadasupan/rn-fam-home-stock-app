@@ -5,7 +5,6 @@ import { Feather } from "@expo/vector-icons";
 export const MemberList = ({ members = [] }: { members: any[] }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // sort ให้ admin ขึ้นก่อน
   const sortedMembers = [...members].sort((a, b) =>
     a.role === "admin" ? -1 : 1,
   );
@@ -92,9 +91,9 @@ export const MemberList = ({ members = [] }: { members: any[] }) => {
 const styles = StyleSheet.create({
   section: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 30, // คุมธีมความโค้งเท่าหน้า Home
+    borderRadius: 30,
     marginBottom: 20,
-    padding: 12, // Padding เล็กน้อยเพื่อให้ข้างในดูเป็นการ์ดซ้อนการ์ด
+    padding: 12,
     borderWidth: 1,
     borderColor: "#F1F5F9",
     // Soft Shadow
@@ -104,7 +103,6 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     elevation: 2,
   },
-
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -112,13 +110,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
-
   titleWrapper: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
   },
-
   iconBox: {
     width: 36,
     height: 36,
@@ -127,51 +123,44 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   sectionTitle: {
     fontSize: 16,
     fontFamily: "Prompt_700Bold",
     color: "#1E293B",
   },
-
   countBadge: {
     backgroundColor: "#F1F5F9",
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 8,
   },
-
   countText: {
     fontSize: 12,
     fontFamily: "Prompt_700Bold",
     color: "#64748B",
   },
-
   listContainer: {
     marginTop: 8,
-    backgroundColor: "#F8FAFC", // พื้นหลัง Glass อ่อนๆ สำหรับ List
+    backgroundColor: "#F8FAFC",
     borderRadius: 22,
     padding: 8,
   },
-
   memberItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 12,
-    backgroundColor: "#FFFFFF", // การ์ดสมาชิกสีขาวบนพื้น Slate
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
     marginBottom: 8,
     borderWidth: 1,
     borderColor: "#F1F5F9",
   },
-
   memberLeft: {
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
   },
-
   avatarCircle: {
     width: 40,
     height: 40,
@@ -180,32 +169,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: 14,
   },
-
   adminAvatar: {
     backgroundColor: "#ECFDF5",
   },
-
   memberAvatar: {
     backgroundColor: "#F1F5F9",
   },
-
   nameContent: {
     flex: 1,
   },
-
   memberName: {
     fontSize: 15,
     fontFamily: "Prompt_600SemiBold",
     color: "#1E293B",
   },
-
   roleLabel: {
     fontSize: 11,
     fontFamily: "Prompt_400Regular",
     color: "#94A3B8",
     marginTop: 1,
   },
-
   adminTag: {
     width: 24,
     height: 24,
@@ -214,12 +197,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   emptyBox: {
     padding: 24,
     alignItems: "center",
   },
-
   emptyText: {
     color: "#94A3B8",
     fontSize: 14,

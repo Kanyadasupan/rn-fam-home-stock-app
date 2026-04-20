@@ -12,7 +12,6 @@ import {
   Keyboard,
 } from "react-native";
 import { Button } from "@/components/Button";
-// 🟢 เพิ่ม SafeAreaView เข้ามาช่วยจัดการขอบล่าง
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface CreateSessionModalProps {
@@ -29,9 +28,8 @@ export const CreateSessionModal = ({
   loading,
 }: CreateSessionModalProps) => {
   const [sessionName, setSessionName] = useState("");
-  const insets = useSafeAreaInsets(); // 🟢 ดึงค่าความสูงของขอบจอล่างมาใช้
+  const insets = useSafeAreaInsets();
 
-  // ล้างค่าฟอร์มทุกครั้งที่เปิด Modal ขึ้นมาใหม่
   useEffect(() => {
     if (visible) setSessionName("");
   }, [visible]);
@@ -48,14 +46,12 @@ export const CreateSessionModal = ({
           <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
             <KeyboardAvoidingView
               behavior={Platform.OS === "ios" ? "padding" : "height"}
-              // 🟢 ไม่ให้ KeyboardAvoidingView ดันมากเกินไปจนเห็นข้างหลัง
               keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -20} 
               style={{ width: "100%" }}
             >
               <View 
                 style={[
                   styles.modalContent, 
-                  // 🟢 บวก paddingBottom เพิ่มไปอีกเพื่อให้สีขาวปิดเต็มยันขอบจอล่าง
                   { paddingBottom: Math.max(insets.bottom + 20, 40) } 
                 ]}
               >
@@ -98,15 +94,14 @@ const styles = StyleSheet.create({
   modalBackdrop: {
     flex: 1,
     backgroundColor: "rgba(15, 23, 42, 0.4)",
-    justifyContent: "flex-end", // ให้เนื้อหากองอยู่ด้านล่างสุด
+    justifyContent: "flex-end",
   },
   modalContent: {
     backgroundColor: "#FFF",
     paddingHorizontal: 28,
-    // 🟢 เอา paddingBottom ออกจากตรงนี้ ไปใส่แบบไดนามิกใน style แทน
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
-    width: "100%", // 🟢 บังคับให้กว้างเต็มจอ
+    width: "100%",
   },
   dragHandle: {
     width: 36,

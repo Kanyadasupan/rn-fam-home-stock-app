@@ -50,7 +50,7 @@ export default function HomeScreen() {
         duration: 800,
         useNativeDriver: true,
       }).start();
-    }, []),
+    },[fadeAnim] ),
   );
 
   const fetchData = async () => {
@@ -80,9 +80,8 @@ export default function HomeScreen() {
     } = await supabase.auth.getUser();
 
     const joinCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-    const now = new Date().toISOString(); // 🟢 ดึงเวลาปัจจุบัน
+    const now = new Date().toISOString();
 
-    // 🟢 แนบ created_at ลงไปด้วยเพื่อไม่ให้ Database ฟ้อง Error Null
     const { data: newFam, error } = await supabase
       .from("families")
       .insert([

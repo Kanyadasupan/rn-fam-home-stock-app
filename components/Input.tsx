@@ -10,7 +10,7 @@ import {
 
 interface InputProps extends TextInputProps {
   label: string;
-  rightIcon?: React.ReactNode; // 🟢 เพิ่ม Prop รองรับไอคอนด้านขวา (เช่น ลูกตาเปิด-ปิดรหัส)
+  rightIcon?: React.ReactNode;
 }
 
 export const Input = ({ label, rightIcon, ...props }: InputProps) => {
@@ -20,7 +20,7 @@ export const Input = ({ label, rightIcon, ...props }: InputProps) => {
     Animated.timing(borderAnim, {
       toValue: 1,
       duration: 250,
-      useNativeDriver: false, // borderColor ไม่รองรับ Native Driver
+      useNativeDriver: false,
     }).start();
     props.onFocus?.(e);
   };
@@ -34,13 +34,11 @@ export const Input = ({ label, rightIcon, ...props }: InputProps) => {
     props.onBlur?.(e);
   };
 
-  // Interpolate สีขอบ: Slate-100 -> Emerald-500
   const borderColor = borderAnim.interpolate({
     inputRange: [0, 1],
     outputRange: ["#F1F5F9", "#10B981"],
   });
 
-  // Interpolate สีพื้นหลัง: Slate-50 -> Pure White
   const backgroundColor = borderAnim.interpolate({
     inputRange: [0, 1],
     outputRange: ["#F8FAFC", "#FFFFFF"],
@@ -55,7 +53,6 @@ export const Input = ({ label, rightIcon, ...props }: InputProps) => {
           {
             borderColor,
             backgroundColor,
-            // เพิ่มเงาจางๆ ตอน Focus (iOS)
             shadowOpacity: borderAnim.interpolate({
               inputRange: [0, 1],
               outputRange: [0, 0.05],
@@ -71,7 +68,6 @@ export const Input = ({ label, rightIcon, ...props }: InputProps) => {
           selectionColor="#10B981" // สี Cursor Emerald
           {...props}
         />
-        {/* 🟢 ถ้ามีการส่ง rightIcon มา ให้แสดงตรงนี้ */}
         {rightIcon && (
           <View style={styles.rightIconContainer}>{rightIcon}</View>
         )}
@@ -83,24 +79,24 @@ export const Input = ({ label, rightIcon, ...props }: InputProps) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    marginBottom: 16, // ปรับให้กระชับเข้ากับดีไซน์ใหม่
+    marginBottom: 16,
   },
   label: {
     fontSize: 12,
     fontFamily: "Prompt_600SemiBold",
-    color: "#475569", // Slate-600
+    color: "#475569",
     marginBottom: 8,
     marginLeft: 4,
     textTransform: "uppercase",
     letterSpacing: 0.8,
   },
   inputWrapper: {
-    flexDirection: "row", // 🟢 เรียงแนวนอนเผื่อมี Icon
+    flexDirection: "row",
     alignItems: "center",
     borderWidth: 1.5,
     borderRadius: 20,
     overflow: "hidden",
-    height: 56, // 🟢 ปรับเป็น 56 ให้เข้ากับปุ่มหลัก
+    height: 56,
     // Shadow สำหรับ Focus
     shadowColor: "#10B981",
     shadowOffset: { width: 0, height: 4 },
@@ -110,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     fontSize: 16,
-    color: "#1E293B", // Slate-800
+    color: "#1E293B",
     fontFamily: "Prompt_400Regular",
     height: "100%",
   },

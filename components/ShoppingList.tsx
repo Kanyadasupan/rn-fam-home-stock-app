@@ -347,7 +347,6 @@ export const ShoppingList = ({ familyId }: { familyId: string }) => {
     silentFetchItems();
   };
 
-  // ─── Render: หน้าเลือกรอบการซื้อของ ───
   if (!currentSession) {
     return (
       <View style={styles.container}>
@@ -414,7 +413,6 @@ export const ShoppingList = ({ familyId }: { familyId: string }) => {
     );
   }
 
-  // ─── Render: หน้าจัดการสินค้าในทริป ───
   const totalSpent = items
     .filter((i) => i.is_bought)
     .reduce(

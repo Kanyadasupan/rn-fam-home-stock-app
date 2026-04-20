@@ -15,7 +15,6 @@ export const ShoppingItemRow = ({
   onEdit,
   onDelete,
 }: ShoppingItemRowProps) => {
-  // คำนวณราคารวมของรายการนี้ (ราคาต่อหน่วย x จำนวน)
   const lineTotal = (Number(item.price) || 0) * (Number(item.quantity) || 1);
 
   const renderPriceDiff = () => {
@@ -62,7 +61,7 @@ export const ShoppingItemRow = ({
           {item.is_bought && <Feather name="check" size={16} color="#FFF" />}
         </View>
 
-        {/* 📸 แสดงรูปภาพสินค้า (ถ้ามี) */}
+        {/* แสดงรูปภาพสินค้า (ถ้ามี) */}
         {item.image_url ? (
           <Image source={{ uri: item.image_url }} style={styles.itemImage} />
         ) : (
@@ -72,7 +71,7 @@ export const ShoppingItemRow = ({
         )}
 
         <View style={{ flex: 1 }}>
-          {/* 1. ชื่อรายการ */}
+          {/* ชื่อรายการ */}
           <Text
             style={[styles.itemName, item.is_bought && styles.itemBought]}
             numberOfLines={1}
@@ -80,14 +79,14 @@ export const ShoppingItemRow = ({
             {item.name}
           </Text>
 
-          {/* 2. หมวดหมู่ */}
+          {/* หมวดหมู่ */}
           {item.category && !item.is_bought && (
             <View style={styles.categoryContainer}>
               <Text style={styles.categoryTag}>{item.category}</Text>
             </View>
           )}
 
-          {/* 3. ส่วนแสดงราคา */}
+          {/* ส่วนแสดงราคา */}
           <View style={styles.detailsContainer}>
             <View style={styles.priceSection}>
               <Text
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
   itemCard: {
     backgroundColor: "#FFFFFF",
     borderRadius: 20,
-    padding: 12, // ลด padding เล็กน้อยเพื่อให้รูปดูเด่น
+    padding: 12,
     marginBottom: 12,
     flexDirection: "row",
     alignItems: "center",

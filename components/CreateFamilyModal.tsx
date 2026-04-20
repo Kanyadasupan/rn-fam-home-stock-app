@@ -26,7 +26,6 @@ export const CreateFamilyModal = ({
     if (visible) setName("");
   }, [visible]);
 
-  // 🟢 สร้างตัวแปรเช็คว่าพิมพ์ชื่อหรือยัง (ถ้าไม่มีชื่อจะเป็น true)
   const isInvalid = !name.trim();
 
   return (
@@ -78,7 +77,6 @@ export const CreateFamilyModal = ({
               </View>
 
               <View style={styles.buttonWrapper}>
-                {/* 🟢 ส่งค่า disabled เข้าไปที่ Component Button */}
                 <Button
                   title="ยืนยันการสร้างกลุ่ม"
                   onPress={() => onSubmit(name)}

@@ -13,7 +13,7 @@ interface ButtonProps {
   title: string;
   onPress: () => void;
   loading?: boolean;
-  type?: "primary" | "outline" | "ghost"; // เพิ่ม ghost สำหรับปุ่มทางเลือก
+  type?: "primary" | "outline" | "ghost";
   disabled?: boolean;
 }
 
@@ -30,7 +30,7 @@ export const Button = ({
   const handlePressIn = () => {
     Animated.parallel([
       Animated.spring(scale, {
-        toValue: 0.96, // ยุบตัวลงเล็กน้อยพองาม
+        toValue: 0.96,
         useNativeDriver: true,
       }),
       Animated.timing(opacity, {
@@ -79,7 +79,7 @@ export const Button = ({
   return (
     <Animated.View style={{ transform: [{ scale }], opacity, width: "100%" }}>
       <TouchableOpacity
-        activeOpacity={1} // ใช้ Animation คุมเอง
+        activeOpacity={1}
         onPress={onPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
@@ -87,7 +87,7 @@ export const Button = ({
       >
         {type === "primary" ? (
           <LinearGradient
-            colors={["#10B981", "#059669"]} // Emerald Gradient ที่ลึกขึ้น
+            colors={["#10B981", "#059669"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={[
@@ -113,56 +113,47 @@ export const Button = ({
     </Animated.View>
   );
 };
-
 const styles = StyleSheet.create({
   button: {
     width: "100%",
-    height: 56, // ความสูงมาตรฐานเพื่อให้เข้ากับ UI อื่นๆ
-    borderRadius: 24, // โค้งมนเท่ากับการ์ดในหน้า Home
+    height: 56,
+    borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 4,
   },
-
   primaryShadow: {
-    // เงาแบบ Soft Slate ผสม Emerald เล็กน้อย
     shadowColor: "#065F46",
     shadowOpacity: 0.15,
     shadowOffset: { width: 0, height: 8 },
     shadowRadius: 12,
     elevation: 4,
   },
-
   outline: {
-    backgroundColor: "#FFFFFF", // พื้นหลังขาวสะอาด
+    backgroundColor: "#FFFFFF",
     borderWidth: 1.5,
-    borderColor: "#F1F5F9", // ขอบ Slate อ่อนๆ ให้ความรู้สึก Glass
+    borderColor: "#F1F5F9",
     shadowColor: "#000",
     shadowOpacity: 0.03,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
   },
-
   disabled: {
     opacity: 0.5,
   },
-
   disabledOutline: {
     borderColor: "#F1F5F9",
     opacity: 0.4,
   },
-
   text: {
     fontSize: 16,
-    fontFamily: "Prompt_600SemiBold", // ใช้ SemiBold เพื่อความสบายตา
+    fontFamily: "Prompt_600SemiBold",
     letterSpacing: 0.2,
   },
-
   textPrimary: {
     color: "#FFFFFF",
   },
-
   textOutline: {
-    color: "#10B981", // ตัวหนังสือเขียว Emerald สำหรับปุ่มรอง
+    color: "#10B981",
   },
 });

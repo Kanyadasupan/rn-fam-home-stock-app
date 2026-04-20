@@ -100,7 +100,6 @@ export const FamilyHeader = ({ family }: { family: any }) => {
                 {family.name}
               </Text>
 
-              {/* 🟢 3. ซ่อนไอคอนดินสอถ้าไม่ใช่ Owner */}
               {isOwner && (
                 <TouchableOpacity
                   style={styles.editIconBtn}
@@ -143,7 +142,6 @@ export const FamilyHeader = ({ family }: { family: any }) => {
         </TouchableOpacity>
       </Animated.View>
 
-      {/* Modal สำหรับแก้ไขชื่อครอบครัว */}
       <Modal visible={isEditModalVisible} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
           <KeyboardAvoidingView

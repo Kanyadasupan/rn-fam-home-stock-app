@@ -51,7 +51,6 @@ export const ShoppingItemFormModal = ({
 }: any) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // 🟢 Validation
   const isInvalid = !formData.name?.trim() || !formData.category;
 
   const pickImage = async () => {
@@ -117,7 +116,6 @@ export const ShoppingItemFormModal = ({
                 keyboardShouldPersistTaps="always"
                 contentContainerStyle={{ paddingBottom: 20 }}
               >
-                {/* 📸 Photo Section */}
                 <Text style={styles.label}>รูปภาพสินค้า</Text>
                 <View style={styles.imagePickerContainer}>
                   <TouchableOpacity
@@ -244,14 +242,12 @@ export const ShoppingItemFormModal = ({
                   ))}
                 </ScrollView>
 
-                {/* 🟢 แก้ไขช่อง จำนวน และ ราคา/หน่วย ให้ Placeholder แสดงผล */}
                 <View style={styles.row}>
                   <View style={styles.inputGroupSmall}>
                     <Text style={styles.label}>จำนวน</Text>
                     <View style={styles.inputWrapper}>
                       <TextInput
                         style={styles.input}
-                        // 🟢 Logic: ถ้าค่าเป็น 1, 0, null หรือว่าง ให้ส่งค่า "" เพื่อโชว์ Placeholder
                         value={
                           !formData.quantity ||
                           formData.quantity.toString() === "1" ||
@@ -274,7 +270,6 @@ export const ShoppingItemFormModal = ({
                     <View style={styles.inputWrapper}>
                       <TextInput
                         style={styles.input}
-                        // 🟢 Logic เดียวกันกับช่องจำนวนครับ
                         value={
                           !formData.price ||
                           formData.price.toString() === "0" ||

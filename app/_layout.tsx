@@ -92,7 +92,6 @@ export default function RootLayout() {
             headerStyle: { backgroundColor: "#F9FAFB" },
             headerShadowVisible: false,
             headerBackVisible: false,
-            // 🟢 เหลือไอคอนเดียวเพื่อความมินิมอลตามที่ต้องการ
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => setShowEditProfile(true)}
@@ -110,7 +109,6 @@ export default function RootLayout() {
         />
       </Stack>
 
-      {/* ปุ่มออกจากระบบจะอยู่ในนี้แทน */}
       <EditProfileModal
         visible={showEditProfile}
         onClose={() => setShowEditProfile(false)}

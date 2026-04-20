@@ -12,19 +12,17 @@ import {
   Text,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-
-// นำเข้า Components ที่เราปรับแต่งเป็นแนว Modern Minimalist Glass แล้ว
 import { FamilyHeader } from "@/components/FamilyHeader";
 import { MemberList } from "@/components/MemberList";
 import { ShoppingList } from "@/components/ShoppingList";
 
 // ─── Design Tokens (Modern Slate & Emerald) ──────────────────────────────────
 const C = {
-  primary: "#10B981", // Emerald-500
-  danger: "#EF4444", // Red-500 สำหรับปุ่มลบ/ออก
-  bg: "#F8FAFC", // Slate-50 (พรีเมียมมินิมอล)
-  textHigh: "#1E293B", // Slate-800
-  textMed: "#64748B", // Slate-500
+  primary: "#10B981",
+  danger: "#EF4444",
+  bg: "#F8FAFC",
+  textHigh: "#1E293B",
+  textMed: "#64748B",
 } as const;
 
 export default function FamilyScreen() {
@@ -36,10 +34,8 @@ export default function FamilyScreen() {
   const [members, setMembers] = useState<any[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
-  // 🟢 ตรวจสอบสถานะว่าเป็นคนสร้างครอบครัว (Owner) หรือไม่
   const isOwner = family?.created_by === currentUserId;
 
-  // 1. ดึงข้อมูล User ปัจจุบัน
   useEffect(() => {
     const getCurrentUser = async () => {
       const {
@@ -50,16 +46,13 @@ export default function FamilyScreen() {
     getCurrentUser();
   }, []);
 
-  // 2. ดึงข้อมูลครั้งแรกเมื่อหน้าจอโหลด
   useEffect(() => {
     if (id) fetchFamilyData();
   }, [id]);
 
-  // 3. เพิ่มระบบ Realtime เพื่อฟังการเปลี่ยนแปลงของกลุ่มและสมาชิก
   useEffect(() => {
     if (!id) return;
 
-    // สร้าง Channel เพื่อฟังเสียงจาก Database
     const channel = supabase
       .channel(`family-realtime-${id}`)
       .on(
@@ -84,7 +77,6 @@ export default function FamilyScreen() {
       )
       .subscribe();
 
-    // ยกเลิกการฟังเมื่อปิดหน้านี้
     return () => {
       supabase.removeChannel(channel);
     };
@@ -92,7 +84,6 @@ export default function FamilyScreen() {
 
   const fetchFamilyData = async () => {
     try {
-      // 1. ดึงข้อมูลครอบครัว
       const { data: famData, error: famError } = await supabase
         .from("families")
         .select("*")
@@ -102,7 +93,6 @@ export default function FamilyScreen() {
       if (famError) throw famError;
       if (famData) setFamily(famData);
 
-      // 2. ดึงข้อมูลสมาชิก
       const { data: memData, error: memError } = await supabase
         .from("family_members")
         .select(
@@ -119,14 +109,12 @@ export default function FamilyScreen() {
       if (memData) setMembers(memData);
     } catch (error) {
       console.error("Error fetching family data:", error);
-      // ถ้าข้อมูลครอบครัวหายไป (เช่น ถูกลบโดยเครื่องอื่น) ให้เด้งกลับหน้าหลัก
       router.replace("/home");
     } finally {
       setLoading(false);
     }
   };
 
-  // 🔴 ฟังก์ชัน: ลบครอบครัว (เฉพาะคนสร้างเท่านั้น)
   const handleDeleteFamily = async () => {
     Alert.alert(
       "ยืนยันการลบครอบครัว",
@@ -139,28 +127,24 @@ export default function FamilyScreen() {
           onPress: async () => {
             setLoading(true);
             try {
-              // 1. ดึงข้อมูลรูปภาพจากตาราง items ออกมาก่อน
               const { data: familyItems } = await supabase
                 .from("items")
                 .select("image_url")
                 .eq("family_id", id);
 
-              // 🟢 แปลง URL เต็มให้เหลือแค่ "ชื่อไฟล์" เพื่อให้ Supabase ลบได้ถูกต้อง
               const imagePaths = familyItems
                 ?.map((item) => {
                   const url = item.image_url;
                   if (!url) return null;
 
-                  // หาคำว่า "shopping-items/" แล้วตัดเอาเฉพาะสิ่งที่อยู่ข้างหลังมา
                   const bucketString = "shopping-items/";
                   if (url.includes(bucketString)) {
                     return url.split(bucketString)[1];
                   }
-                  return url; // ถ้าเป็นชื่อไฟล์อยู่แล้วก็ส่งไปเลย
+                  return url;
                 })
                 .filter((path) => path != null) as string[];
 
-              // 2. ลบรูปใน Storage ทิ้งทั้งหมด (ถ้ามี)
               if (imagePaths && imagePaths.length > 0) {
                 const { error: storageError } = await supabase.storage
                   .from("shopping-items")
@@ -171,7 +155,6 @@ export default function FamilyScreen() {
                 }
               }
 
-              // 3. ลบครอบครัวออกจาก DB (CASCADE จะลบข้อมูลตารางอื่นๆ ให้เอง)
               const { error } = await supabase
                 .from("families")
                 .delete()
@@ -190,7 +173,6 @@ export default function FamilyScreen() {
     );
   };
 
-  // 🚪 ฟังก์ชัน: ออกจากครอบครัว (สำหรับสมาชิกทั่วไป)
   const handleLeaveFamily = async () => {
     Alert.alert(
       "ยืนยันการออกจากครอบครัว",
@@ -222,7 +204,6 @@ export default function FamilyScreen() {
     );
   };
 
-  // ─── Loading State ───
   if (loading || !family) {
     return (
       <View style={styles.center}>
@@ -243,7 +224,6 @@ export default function FamilyScreen() {
     <View style={styles.root}>
       <StatusBar barStyle="dark-content" />
 
-      {/* 🚀 ปรับแต่ง Navigation Header ให้เข้าเซต Glassmorphism */}
       <Stack.Screen
         options={{
           title: family.name,
@@ -257,7 +237,6 @@ export default function FamilyScreen() {
           headerTintColor: C.textHigh,
           headerBackTitle: "",
           headerBackVisible: true,
-          // 🔴 ปุ่มมุมขวาบน (ลบ/ออก)
           headerRight: () => (
             <TouchableOpacity
               onPress={isOwner ? handleDeleteFamily : handleLeaveFamily}
@@ -278,16 +257,15 @@ export default function FamilyScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {/* ส่วนหัว: การ์ดชื่อครอบครัวและรหัสเชิญ */}
+        {/* ส่วนหัว */}
         <FamilyHeader family={family} />
 
-        {/* รายชื่อสมาชิก: แสดงแบบการ์ดซ้อนการ์ด */}
+        {/* รายชื่อสมาชิก */}
         <MemberList members={members} />
 
-        {/* รายการช้อปปิ้ง: ส่วนจัดเก็บสินค้า */}
+        {/* รายการช้อปปิ้ง */}
         <ShoppingList familyId={family.id} />
 
-        {/* 🔴 ปุ่มใหญ่ด้านล่างสุด (ลบ/ออก) เพื่อให้กดย้ายได้ง่าย */}
         <TouchableOpacity
           style={styles.dangerButton}
           onPress={isOwner ? handleDeleteFamily : handleLeaveFamily}
@@ -340,7 +318,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: C.danger,
     borderStyle: "dashed",
-    backgroundColor: "#FEF2F2", // พื้นหลังแดงอ่อนๆ
+    backgroundColor: "#FEF2F2",
     gap: 8,
   },
   dangerButtonText: {

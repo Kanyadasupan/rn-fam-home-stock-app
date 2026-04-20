@@ -49,7 +49,6 @@ export const ForgotPasswordModal = ({
     if (error) {
       Alert.alert("ผิดพลาด", error.message);
     } else {
-      // 🟢 แก้ข้อความแจ้งเตือน ไม่ระบุจำนวนหลัก
       Alert.alert("ส่งรหัสสำเร็จ", "กรุณานำรหัสจากอีเมลมากรอกในแอป");
       setStep(2);
     }
@@ -112,7 +111,6 @@ export const ForgotPasswordModal = ({
           {step === 1 ? (
             <>
               <Text style={styles.modalHeader}>ลืมรหัสผ่านใช่ไหม?</Text>
-              {/* 🟢 แก้คำอธิบาย ไม่ระบุ 6 หลัก */}
               <Text style={styles.modalSubtitle}>
                 กรอกอีเมลของคุณเพื่อรับรหัส OTP สำหรับตั้งรหัสใหม่
               </Text>
@@ -171,10 +169,10 @@ export const ForgotPasswordModal = ({
                   style={styles.modalInput}
                   value={otp}
                   onChangeText={setOtp}
-                  placeholder="รหัส OTP" // 🟢 เปลี่ยน placeholder
+                  placeholder="รหัส OTP"
                   placeholderTextColor="#94A3B8"
                   keyboardType="number-pad"
-                  maxLength={8} // 🟢 ขยายความจุให้พิมพ์ได้ถึง 8 หลัก
+                  maxLength={8}
                 />
               </View>
 
